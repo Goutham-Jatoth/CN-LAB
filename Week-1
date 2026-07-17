@@ -1,0 +1,45 @@
+1. Error Detection
+
+
+1)Bit Stuffing
+--------------
+#include <stdio.h>
+int main() {
+    char a[100];
+    int i, count = 0;
+    printf("Enter bits: ");
+    scanf("%s", a);
+    printf("Stuffed Data: ");
+    for (i = 0; a[i] != '\0'; i++) {
+        printf("%c", a[i]);
+        if (a[i] == '1') {
+            count++;
+            if (count == 5) {
+                printf("0");
+                count = 0;
+            }
+        } else {
+            count = 0;
+        }
+    }
+    return 0;
+}
+
+
+(2) Char Stuffing
+-----------------
+#include <stdio.h>
+int main() {
+    char s[100];
+    int i;
+    printf("Enter string: ");
+    scanf("%s", s);
+    printf("Stuffed Data: <");
+    for (i = 0; s[i] != '\0'; i++) {
+        if (s[i] == '$')
+            printf("$");
+        printf("%c", s[i]);
+    }
+    printf(">");
+    return 0;
+}
