@@ -1,0 +1,95 @@
+1. AIM
+
+To develop a simple data link layer that performs flow control using Sliding Window and loss recovery using Go-Back-N.
+
+2. THEORY
+Sliding Window
+Multiple frames can be sent before receiving acknowledgements.
+The window moves forward when acknowledgements are received.
+Example: Window size = 4 → frames 0,1,2,3 are sent first.
+Go-Back-N
+If a frame or its acknowledgement is lost, the sender goes back to that frame.
+It retransmits the frames in the current window.
+Example: If frame 2 is not acknowledged, frames 2,3,4,5 are retransmitted.
+3. ALGORITHM
+Read number of frames.
+Read window size.
+Send frames equal to the window size.
+Read acknowledgement number.
+If acknowledgement is valid, slide the window.
+If acknowledgement is missing/invalid, go back and retransmit.
+Continue until all frames are sent.
+4. PROGRAM — SHORT VERSION
+#include <stdio.h>
+
+int main()
+{
+    int frames, win, ack = 0, i;
+
+    printf("enter no.of frames\n");
+    scanf("%d", &frames);
+
+    printf("enter window size\n");
+    scanf("%d", &win);
+
+    while (ack < frames)
+    {
+        for (i = ack; i < ack + win && i < frames; i++)
+            printf("Frame %d has been transmitted.\n", i);
+
+        printf("\nPlease enter the Acknowledgement number: ");
+        scanf("%d", &ack);
+
+        if (ack > i)
+        {
+            if (ack == frames)
+                printf("Total frames were sent");
+            else
+            {
+                printf("invalid and resending the frame\n");
+                ack = i - win;
+            }
+        }
+    }
+
+    return 0;
+}
+
+This is a shortened version of the manual's Program-3 logic; the original uses the same frame/window/acknowledgement approach.
+
+5. OUTPUT
+enter no.of frames
+12
+enter window size
+4
+Frame 0 has been transmitted.
+Frame 1 has been transmitted.
+Frame 2 has been transmitted.
+Frame 3 has been transmitted.
+
+Please enter the Acknowledgement number: 1
+Frame 1 has been transmitted.
+Frame 2 has been transmitted.
+Frame 3 has been transmitted.
+Frame 4 has been transmitted.
+Please enter the Acknowledgement number: 2
+Frame 2 has been transmitted.
+Frame 3 has been transmitted.
+Frame 4 has been transmitted.
+Frame 5 has been transmitted.
+
+This matches the output shown in your manual.
+
+6. RESULT
+
+Thus, the Sliding Window protocol and Go-Back-N mechanism were successfully implemented.
+
+7. VIVA — VERY SHORT
+Question	Answer
+What is Sliding Window?	Flow control technique
+What is window size?	Number of frames that can be sent at a time
+What is Go-Back-N?	Error/loss recovery technique
+What happens when a frame is lost?	Sender retransmits from that frame
+What is ACK?	Acknowledgement
+What is flow control?	Controls the rate of data transmission
+What happens to the window after ACK?	It slides forward
