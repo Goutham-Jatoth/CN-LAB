@@ -1,0 +1,118 @@
+1. AIM
+
+To take an example subnet of hosts and obtain a broadcast tree for the subnet.
+
+2. THEORY
+Broadcast routing is a mechanism in which a router sends a packet to all routers in the network.
+The subnet is represented using a graph.
+Each node represents a host/router.
+Each edge represents a communication link.
+A spanning tree can be used to form the broadcast tree.
+The manual lists five methods:
+Point-to-point transmission
+Flooding
+Multi-destination routing
+Reverse path routing
+Spanning tree
+Easy idea
+
+Start Host → Find minimum link → Connect new Host → Repeat
+
+3. ALGORITHM
+Read the number of hosts.
+Read the cost adjacency matrix.
+Start from Host 1.
+Mark Host 1 as visited.
+Find the minimum-cost link to an unvisited host.
+Connect that host to the tree.
+Mark it as visited.
+Repeat until all hosts are connected.
+Calculate and display the total cost.
+4. PROGRAM
+
+Shortened version of the manual program, keeping the same output format and logic. The manual uses a spanning tree algorithm for broadcast tree formation.
+
+#include <stdio.h>
+
+#define INF 9999
+#define MAX 10
+
+int main()
+{
+    int n,c[MAX][MAX],v[MAX]={0};
+    int i,j,e=1,a,b,min,total=0;
+
+    printf("=== Computer Network Simulation ===\n");
+    printf("Broadcast Tree Construction using Spanning Tree Algorithm\n\n");
+
+    printf("Enter number of hosts (nodes) in the subnet: ");
+    scanf("%d",&n);
+
+    printf("\nEnter the cost adjacency matrix (Enter 9999 if no direct link):\n");
+    for(i=0;i<n;i++)
+        for(j=0;j<n;j++)
+            scanf("%d",&c[i][j]);
+
+    v[0]=1;
+
+    printf("\nSimulating Broadcast Tree Formation...\n");
+    printf("----------------------------------------\n");
+
+    while(e<n)
+    {
+        min=INF;
+
+        for(i=0;i<n;i++)
+            if(v[i])
+                for(j=0;j<n;j++)
+                    if(!v[j] && c[i][j]<min)
+                        min=c[i][j],a=i,b=j;
+
+        printf("Step %d: Connect Host %d --> Host %d | Link Cost = %d\n",
+               e,a+1,b+1,min);
+
+        total+=min;
+        v[b]=1;
+        e++;
+    }
+
+    printf("----------------------------------------\n");
+    printf("Total Cost of Broadcast Tree = %d\n",total);
+    printf("Simulation Complete: Broadcast Tree Formed Successfully.\n");
+
+    return 0;
+}
+5. OUTPUT
+
+The manual gives this sample output:
+
+=== Computer Network Simulation ===
+Broadcast Tree Construction using Spanning Tree Algorithm
+Enter number of hosts (nodes) in the subnet: 4
+Enter the cost adjacency matrix (Enter 9999 if no direct link):
+0 10 7 9999
+10 0 9999 5
+7 9999 0 6
+9999 5 6 0
+Simulating Broadcast Tree Formation...
+----------------------------------------
+Step 1: Connect Host 1 --> Host 3 | Link Cost = 7
+Step 2: Connect Host 3 --> Host 4 | Link Cost = 6
+Step 3: Connect Host 4 --> Host 2 | Link Cost = 5
+----------------------------------------
+Total Cost of Broadcast Tree = 18
+Simulation Complete: Broadcast Tree Formed Successfully.
+6. RESULT
+
+Thus, the broadcast tree for the given subnet was obtained successfully using the spanning tree algorithm.
+
+7. VIVA – VERY SHORT
+Question	Answer
+What is broadcasting?	Sending a packet to all routers
+What is a broadcast tree?	Tree used to distribute packets to all nodes
+What is a spanning tree?	Tree connecting all nodes without cycles
+What does each node represent?	Host/router
+What does an edge represent?	Communication link
+What is 9999?	No direct link
+Starting host in the program?	Host 1
+Total cost in sample?	18
