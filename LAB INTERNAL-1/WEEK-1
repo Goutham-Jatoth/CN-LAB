@@ -1,0 +1,182 @@
+1. Character Count
+Aim
+
+To implement character count framing.
+
+Theory
+Counts the number of characters in the data.
+Divides the data into frames of the given size.
+Algorithm
+Read the data string.
+Read the frame size.
+Count total characters.
+Divide the data into frames.
+Print the count and characters of each frame.
+Program
+#include <stdio.h>
+#include <string.h>
+
+int main() {
+    char data[100];
+    int frame_size, current_pos = 0;
+    int k, actual_frame_len;
+
+    printf("Enter the data string: ");
+    scanf("%s", data);
+
+    printf("Enter the desired frame size: ");
+    scanf("%d", &frame_size);
+
+    printf("\nThe Total number of chars are : %d", strlen(data));
+    printf("\nTransmitted Frames:\n");
+
+    while (current_pos < strlen(data)) {
+        if ((strlen(data) - current_pos) < frame_size)
+            actual_frame_len = strlen(data) - current_pos;
+        else
+            actual_frame_len = frame_size;
+
+        printf("%d ", actual_frame_len);
+
+        for (k = 0; k < actual_frame_len; k++)
+            printf("%c", data[current_pos + k]);
+
+        printf("\n");
+        current_pos += actual_frame_len;
+    }
+
+    return 0;
+}
+Output
+Enter the data string: ACECOLLEGE
+Enter the desired frame size: 4
+
+The Total number of chars are : 10
+Transmitted Frames:
+4 ACEC
+4 OLLE
+2 GE
+
+The manual also gives CSDDEPARTMENT, frame size 5 → 5 CSDDE, 5 PARTM, 3 ENT.
+
+2. Byte Stuffing
+Aim
+
+To implement byte/character stuffing.
+
+Theory
+A special ESC character is inserted before a character that matches the FLAG or ESC.
+F is used as FLAG and E as ESC in the manual.
+Algorithm
+Read the data.
+Add starting FLAG.
+Check each character.
+If it is F or E, insert E before it.
+Add ending FLAG.
+Display stuffed data.
+Program
+#include <stdio.h>
+#include <string.h>
+
+#define FLAG 'F'
+#define ESC 'E'
+
+int main() {
+    char data[100], stuffedData[200];
+    int i, j = 0;
+
+    printf("Enter the data string: ");
+    scanf("%s", data);
+
+    stuffedData[j++] = FLAG;
+
+    for (i = 0; i < strlen(data); i++) {
+        if (data[i] == FLAG || data[i] == ESC)
+            stuffedData[j++] = ESC;
+
+        stuffedData[j++] = data[i];
+    }
+
+    stuffedData[j++] = FLAG;
+    stuffedData[j] = '\0';
+
+    printf("Original Data: %s\n", data);
+    printf("Stuffed Data: %s\n", stuffedData);
+
+    return 0;
+}
+Output
+Enter the data string: ACE
+Original Data: ACE
+Stuffed Data: FACEEF
+
+Another manual example:
+
+Enter the data string: CSDESC
+Original Data: CSDESC
+Stuffed Data: FCSDEESCF
+
+3. Bit Stuffing
+Aim
+
+To implement bit stuffing.
+
+Theory
+Used to prevent data from being mistaken for a frame delimiter.
+After five consecutive 1s, a 0 is inserted.
+Algorithm
+Read the binary data.
+Count consecutive 1s.
+Copy each bit to output.
+After 5 consecutive 1s, insert 0.
+Display stuffed data.
+Program
+#include <stdio.h>
+#include <string.h>
+
+int main() {
+    char data[100], stuffedData[200];
+    int i, count = 0, j = 0;
+
+    printf("Enter the data: ");
+    scanf("%s", data);
+
+    for (i = 0; i < strlen(data); i++) {
+        if (data[i] == '1') {
+            count++;
+            stuffedData[j++] = data[i];
+        } else {
+            count = 0;
+            stuffedData[j++] = data[i];
+        }
+
+        if (count == 5) {
+            count = 0;
+            stuffedData[j++] = '0';
+        }
+    }
+
+    stuffedData[j] = '\0';
+
+    printf("Data after bit stuffing: %s\n", stuffedData);
+
+    return 0;
+}
+Output
+Enter the data: 01111110
+Data after bit stuffing: 011111010
+
+Another manual example:
+
+Enter the data: 011111111111111101
+Data after bit stuffing: 011111011111011111001
+
+⭐ Viva – Very Short
+Question	Answer
+What is framing?	Dividing data into frames.
+What is character count?	Counting characters and dividing them into frames.
+What is byte stuffing?	Adding ESC before FLAG/ESC characters.
+What is bit stuffing?	Inserting 0 after five consecutive 1s.
+What is FLAG?	A special character marking frame boundaries.
+What is ESC?	Escape character used in byte stuffing.
+Why is bit stuffing used?	To prevent data from being treated as control information.
