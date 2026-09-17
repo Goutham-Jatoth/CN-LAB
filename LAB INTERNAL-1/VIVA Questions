@@ -1,0 +1,395 @@
+🔵 WEEK 1 — DATA LINK LAYER FRAMING
+
+The manual covers Character Count, Byte/Character Stuffing, and Bit Stuffing.
+
+1. What is framing?
+
+Answer: Framing is dividing a stream of data into smaller units called frames.
+
+2. Which layer performs framing?
+
+Answer: Data Link Layer.
+
+3. What are the two framing approaches?
+
+Answer:
+
+Fixed-length framing
+Variable-length framing
+4. What is character count?
+
+Answer: It counts the number of characters and divides the data into frames of a given size.
+
+5. What is character stuffing?
+
+Answer: It adds an extra special character to distinguish data from control information.
+
+6. What is byte stuffing?
+
+Answer: It adds an ESC character before a special character appearing in the data.
+
+7. What is ESC?
+
+Answer: ESC means Escape Character.
+
+8. What is FLAG?
+
+Answer: FLAG is a special character used to indicate the start and end of a frame.
+
+9. What is the flag pattern in bit stuffing?
+
+Answer: 01111110.
+
+10. What is the hexadecimal value of 01111110?
+
+Answer: 7E.
+
+11. What is bit stuffing?
+
+Answer: Inserting a 0 after five consecutive 1s.
+
+12. Why is bit stuffing used?
+
+Answer: To prevent data from being confused with the frame delimiter.
+
+13. What does the receiver do with the stuffed 0?
+
+Answer: It removes the stuffed 0. This is called destuffing.
+
+14. What happens after five consecutive 1s?
+
+Answer: A 0 is inserted.
+
+15. What is destuffing?
+
+Answer: Removing the extra stuffed bit or character at the receiver.
+
+16. Give the bit stuffing example from the manual.
+
+Answer:
+
+01111110 → 011111010.
+
+⭐ Remember Week 1
+
+Framing → Character Count → Character Stuffing → Bit Stuffing → 5 ones → insert 0
+
+🟢 WEEK 2 — CRC
+
+The manual describes CRC as an error-detection method using a generator polynomial and modulo-2 division.
+
+1. What is CRC?
+
+Answer: CRC stands for Cyclic Redundancy Check.
+
+2. Why is CRC used?
+
+Answer: To detect errors in transmitted data.
+
+3. What type of errors can occur during transmission?
+
+Answer: Single-bit errors and burst errors.
+
+4. What is a single-bit error?
+
+Answer: Only one bit of the data changes.
+
+5. What is a burst error?
+
+Answer: Two or more bits in the data are changed.
+
+6. What is redundancy?
+
+Answer: Adding extra bits to the original data for error detection or correction.
+
+7. What is a generator polynomial?
+
+Answer: It is the polynomial used as the divisor/key in CRC calculation.
+
+8. Give an example of a generator polynomial.
+
+Answer: x³ + x + 1.
+
+9. What is the binary key for x³ + x + 1?
+
+Answer: 1011.
+
+10. What type of division is used in CRC?
+
+Answer: Modulo-2 binary division.
+
+11. How many zeros are added to the data?
+
+Answer: k − 1 zeros, where k is the number of bits in the key.
+
+12. What is done at the sender?
+
+Answer:
+
+Add k−1 zeros.
+Perform modulo-2 division.
+Get the remainder.
+Append the remainder to data.
+13. What is done at the receiver?
+
+Answer: The receiver again performs modulo-2 division.
+
+14. What does remainder 0 mean?
+
+Answer: It means no error is detected.
+
+15. What are CRC-12 and CRC-16?
+
+Answer: They are different CRC methods using different generator polynomials.
+
+16. What is modulo-2 addition?
+
+Answer: It is basically XOR operation.
+
+17. What is 1 XOR 1?
+
+Answer: 0
+
+18. What is 1 XOR 0?
+
+Answer: 1
+
+19. What is the CRC output in the manual example?
+
+Answer: Sender CRC = 011 and receiver CRC = 000.
+
+⭐ Remember Week 2
+
+CRC → Add zeros → Modulo-2 division → Remainder → Append → Receiver checks
+
+🟠 WEEK 3 — SLIDING WINDOW & GO-BACK-N
+1. What is flow control?
+
+Answer: It controls the rate of data transmission between sender and receiver.
+
+2. What is Sliding Window Protocol?
+
+Answer: It allows the sender to send multiple frames before waiting for acknowledgements.
+
+3. Why is a window used?
+
+Answer: To control the number of frames that can be sent at a time.
+
+4. What is an ACK?
+
+Answer: ACK means Acknowledgement.
+
+5. What does ACK indicate?
+
+Answer: It indicates that a frame was received successfully.
+
+6. What is Go-Back-N?
+
+Answer: It is an error-recovery method where the sender retransmits the lost/error frame and all following frames.
+
+7. What happens when an ACK is lost?
+
+Answer: The sender goes back and retransmits the required frames.
+
+8. What is the main purpose of Go-Back-N?
+
+Answer: Loss recovery.
+
+9. What is the main purpose of Sliding Window?
+
+Answer: Flow control.
+
+10. How many frames are used in the manual example?
+
+Answer: 12 frames, numbered 0 to 11.
+
+11. What is the window size in the manual example?
+
+Answer: 4.
+
+12. Which frames are initially transmitted?
+
+Answer: 0, 1, 2, 3.
+
+13. If ACK 0 is received, which frame is sent next?
+
+Answer: Frame 4.
+
+14. If ACK 1 is received, which frame is sent next?
+
+Answer: Frame 5.
+
+15. What happens if ACK 2 is lost?
+
+Answer: The sender goes back to frame 2 and retransmits 2, 3, 4, 5.
+
+16. What is retransmission?
+
+Answer: Sending a frame again.
+
+17. What is the difference between Sliding Window and Go-Back-N?
+
+Answer:
+
+Sliding Window	Go-Back-N
+Flow control	Error recovery
+Controls number of frames	Retransmits frames after an error
+⭐ Remember Week 3
+
+Sliding Window = Flow Control
+Go-Back-N = Retransmission
+
+🔴 WEEK 4 — DIJKSTRA'S ALGORITHM
+
+The manual describes Dijkstra as creating a shortest path tree, using tentative and permanent node sets.
+
+1. What is Dijkstra's algorithm?
+
+Answer: It is an algorithm used to find the shortest path from a source node.
+
+2. What does Dijkstra calculate?
+
+Answer: The shortest distance from the source to other nodes.
+
+3. What is a source node?
+
+Answer: The node from which we start finding shortest paths.
+
+4. What is a shortest path?
+
+Answer: The path having the minimum cost or distance.
+
+5. What is a shortest path tree?
+
+Answer: A tree in which the path from the root to every other node is the shortest path.
+
+6. What are the two sets used in Dijkstra?
+
+Answer:
+
+Tentative set
+Permanent set
+7. What is a tentative node?
+
+Answer: A node whose shortest distance is not finalized yet.
+
+8. What is a permanent node?
+
+Answer: A node whose shortest distance is finalized.
+
+9. Which node is selected next?
+
+Answer: The tentative node with the smallest distance.
+
+10. Can Dijkstra work with negative edge weights?
+
+Answer: No.
+
+11. What is the first step in Dijkstra?
+
+Answer: Set the source distance to 0.
+
+12. What is the distance of other nodes initially?
+
+Answer: Infinity/large value.
+
+13. What is the main advantage of Dijkstra?
+
+Answer: It finds shortest paths efficiently.
+
+14. Where is Dijkstra used?
+
+Answer: In network routing and shortest-path problems.
+
+15. What routing protocol is mentioned with Dijkstra in the manual?
+
+Answer: OSPF uses link-state routing and shortest-path tree concepts.
+
+16. What is OSPF?
+
+Answer: OSPF stands for Open Shortest Path First.
+
+17. What does OSPF use?
+
+Answer: Link-state routing.
+
+⭐ Remember Week 4
+
+Dijkstra → Source → Smallest distance → Permanent → Update neighbors → Repeat
+
+🟣 WEEK 5 — BROADCAST TREE
+
+The manual defines broadcast routing as sending a packet to all routers in the graph and lists five approaches, including spanning tree.
+
+1. What is broadcasting?
+
+Answer: Sending a packet to all routers/nodes in the network.
+
+2. What is a broadcast tree?
+
+Answer: A tree used to distribute a packet to all required nodes without unnecessary paths.
+
+3. What is a subnet?
+
+Answer: A smaller network within a larger network.
+
+4. What does a node represent in the manual's graph?
+
+Answer: A router.
+
+5. What does an arc represent?
+
+Answer: A communication line/link between routers.
+
+6. What are the five ways of broadcast routing?
+
+Answer:
+
+Point-to-point transmission
+Flooding
+Multi-destination routing
+Reverse path routing
+Spanning tree
+7. What is flooding?
+
+Answer: Sending a packet through available links so it reaches other nodes.
+
+8. What is a spanning tree?
+
+Answer: A tree connecting all nodes without forming a cycle.
+
+9. How many edges does a spanning tree have for n nodes?
+
+Answer: n − 1 edges.
+
+10. Does a spanning tree contain cycles?
+
+Answer: No.
+
+11. Why is a spanning tree used for broadcasting?
+
+Answer: To send data to all nodes while avoiding unnecessary duplicate paths.
+
+12. What is the starting host in the manual program?
+
+Answer: Host 1.
+
+13. What does 9999 represent in the program?
+
+Answer: No direct link between two hosts.
+
+14. What is visited[] used for?
+
+Answer: To keep track of already connected hosts.
+
+15. What is total_cost?
+
+Answer: It stores the total cost of the broadcast tree.
+
+16. What algorithmic idea is used in the manual program?
+
+Answer: Spanning Tree / minimum-cost connection approach.
+
+17. What is the total cost in the manual example?
+
+Answer: 18
