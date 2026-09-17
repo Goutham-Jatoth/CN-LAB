@@ -1,0 +1,101 @@
+  WEEK–2: CRC
+
+Based on your CN Lab Manual. The manual’s Program-2 is for computing CRC, and the sender/receiver procedure is given as modulo-2 division.
+
+1. AIM
+
+To write a program to compute CRC code for detecting errors in data transmission.
+
+2. THEORY
+
+CRC (Cyclic Redundancy Check) is an error-detection method used to detect accidental changes/errors during communication.
+
+CRC uses a Generator Polynomial.
+Data is first appended with k-1 zeros.
+Modulo-2 division is performed.
+The remainder is called CRC.
+At the receiver, division is performed again.
+If the remainder is 0, there is no error.
+Example
+
+x³ + x + 1 → 1011
+
+3. ALGORITHM
+Read the data and polynomial.
+Add k-1 zeros to the data.
+Perform modulo-2 division.
+Get the remainder (CRC).
+Append CRC to the original data.
+At receiver, divide the codeword again.
+If remainder is 0, data has no error.
+4. PROGRAM — Short Version
+#include <stdio.h>
+#include <string.h>
+
+void crc(char d[], char p[], int n, int k)
+{
+    for(int i=0;i<n;i++)
+        if(d[i]=='1')
+            for(int j=0;j<k;j++)
+                d[i+j]=(d[i+j]==p[j])?'0':'1';
+
+    printf("%s",&d[n]);
+}
+
+int main()
+{
+    char data[100], p[100], code[100];
+    int n,k;
+
+    printf("Enter data: ");
+    scanf("%s",data);
+
+    printf("Enter Polynomial: ");
+    scanf("%s",p);
+
+    n=strlen(data);
+    k=strlen(p);
+
+    for(int i=0;i<k-1;i++)
+        data[n+i]='0';
+
+    printf("Data with zeros: %s\n\n",data);
+
+    printf("CRC at sender side: ");
+    crc(data,p,n,k);
+
+    printf("\n\nEnter codeword (Data + CRC): ");
+    scanf("%s",code);
+
+    printf("CRC at receiver side: ");
+    crc(code,p,n,k);
+
+    return 0;
+}
+
+The shortened program keeps the same CRC logic and the same output format as the manual. The manual's original program uses the same modulo-2 comparison operation and input/output sequence.
+
+5. OUTPUT
+Enter data: 111101
+Enter Polynomial: 1101
+Data with zeros: 111101000
+CRC at sender side: 011
+Enter codeword (Data + CRC): 111101011
+CRC at receiver side: 000
+
+This is the same output given in your lab manual.
+
+6. RESULT
+
+Thus, the CRC code was successfully computed, and the received codeword was checked for errors.
+
+7. VIVA — VERY SHORT
+Question	Answer
+What is CRC?	Cyclic Redundancy Check
+What is CRC used for?	Error detection
+What does CRC use?	Generator polynomial
+What division is used?	Modulo-2 division
+What is the remainder called?	CRC
+What does remainder 0 mean?	No error
+What is redundancy?	Extra bits added for error detection/correction
+What are two types of errors?	Single-bit and burst error
