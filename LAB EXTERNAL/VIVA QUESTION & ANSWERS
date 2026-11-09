@@ -1,0 +1,600 @@
+PROGRAM 1 – Data Link Layer Framing
+Aim: Implement character count, character stuffing and bit stuffing.
+
+1. What is framing?
+Framing is a Data Link Layer technique that divides a continuous stream of bits into manageable units called frames.
+
+2. What are the types of framing?
+Fixed-size framing and variable-size framing.
+
+3. What is character count?
+It specifies the number of characters present in each frame so that the receiver can identify the frame length.
+
+4. What is character stuffing?
+It inserts an extra escape character (ESC) before special characters in the data to prevent confusion with frame delimiters.
+
+5. What is byte stuffing?
+Byte stuffing is another name for character stuffing, where extra bytes are inserted into the data whenever required.
+
+6. What is bit stuffing?
+It inserts a 0 bit after every sequence of five consecutive 1s to prevent data from being mistaken for a flag.
+
+7. What is the flag byte used in bit stuffing?
+The flag pattern is 01111110, which represents 7E in hexadecimal.
+
+8. What is destuffing?
+Destuffing is the process of removing the extra stuffed bits or characters at the receiver side.
+
+9. Why is stuffing required?
+Stuffing prevents data from being accidentally interpreted as control information or frame boundaries.
+
+10. Which OSI layer performs framing?
+The Data Link Layer (Layer 2).
+CN LAB MANUAL 2026-27.docx
+
+PROGRAM 2 – Cyclic Redundancy Check (CRC)
+Aim: Compute CRC codes for CRC-12, CRC-16 and CRC-CCITT.
+
+1. What is CRC?
+CRC stands for Cyclic Redundancy Check. It is an error-detection technique used to detect errors during data transmission.
+
+2. What is a generator polynomial?
+It is a predefined binary polynomial used as a divisor to calculate the CRC remainder.
+
+3. What is modulo-2 division?
+It is binary division performed using XOR operations without carrying or borrowing.
+
+4. What is XOR?
+XOR gives 1 when the two input bits are different and 0 when they are the same.
+
+5. What is a codeword?
+A codeword is the original data combined with the CRC remainder.
+
+6. Why are zeros added to the data before CRC calculation?
+We append \(k-1\) zeros, where \(k\) is the number of bits in the generator polynomial.
+
+7. How is CRC calculated at the sender side?
+The sender appends zeros, performs modulo-2 division and adds the remainder to the original data.
+
+8. How does the receiver detect errors using CRC?
+The receiver divides the received codeword by the same polynomial; a zero remainder indicates no detected error.
+
+9. What is a single-bit error?
+It occurs when only one bit in the transmitted data changes.
+
+10. What is a burst error?
+A burst error occurs when two or more bits in a data unit are changed.
+
+11. What is redundancy?
+Redundancy means adding extra bits to the original data for error detection or correction.
+
+12. What is Hamming code?
+Hamming code is an error-control technique that uses redundant bits to detect and correct errors.
+
+13. What is Hamming distance?
+It is the number of positions in which two binary words differ.
+
+14. What is the minimum Hamming distance required to detect errors?
+To detect up to \(s\) errors, the minimum distance must be \(s+1\).
+
+15. What is the minimum Hamming distance required to correct errors?
+To correct up to \(t\) errors, the minimum distance must be \(2t+1\).
+
+16. What is a checksum?
+A checksum is an error-detection value calculated by adding data words and complementing the sum.
+
+17. What happens if the receiver gets a zero checksum after complementing?
+The received message is accepted as having no detected error.
+CN LAB MANUAL 2026-27.docx
+
+PROGRAM 3 – Sliding Window Protocol and Go-Back-N
+Aim: Implement flow control using the Sliding Window Protocol and loss recovery using Go-Back-N.
+
+1. What is flow control?
+Flow control regulates the speed of data transmission so that the sender does not overwhelm the receiver.
+
+2. What is error control?
+Error control detects and handles lost, damaged or duplicated frames during transmission.
+
+3. What is the Sliding Window Protocol?
+It allows multiple frames to be transmitted before receiving acknowledgements, improving transmission efficiency.
+
+4. What is a sliding window?
+It is a range of sequence numbers representing the frames that can be sent or received.
+
+5. What is window size?
+Window size is the maximum number of frames that can be transmitted without waiting for further acknowledgements.
+
+6. What is Go-Back-N ARQ?
+It is an error-control protocol in which the sender retransmits the lost or damaged frame and all subsequent outstanding frames.
+
+7. What is ARQ?
+ARQ stands for Automatic Repeat reQuest, a technique that uses acknowledgements and retransmissions for reliable communication.
+
+8. What is acknowledgement (ACK)?
+ACK is a message sent by the receiver to inform the sender that frames have been received successfully.
+
+9. What is a sequence number?
+It is a number assigned to each frame to identify it and maintain the correct order of transmission.
+
+10. What is timeout?
+Timeout is the maximum waiting period for an acknowledgement before the sender retransmits a frame.
+
+11. What happens when a frame is lost in Go-Back-N?
+The sender goes back to the missing frame and retransmits that frame and all subsequent outstanding frames.
+
+12. What is Stop-and-Wait ARQ?
+It sends one frame at a time and waits for its acknowledgement before sending the next frame.
+
+13. What is Selective Repeat ARQ?
+It retransmits only the specific lost or damaged frames instead of retransmitting all subsequent frames.
+
+14. What is pipelining?
+Pipelining allows multiple frames to be transmitted before acknowledgements arrive, improving channel utilization.
+
+15. What is the difference between Go-Back-N and Selective Repeat?
+Go-Back-N retransmits multiple outstanding frames, whereas Selective Repeat retransmits only the particular erroneous or lost frame.
+
+16. What is the maximum sender window size in Go-Back-N?
+For an \(m\)-bit sequence number, the maximum window size is \(2^m-1\).
+CN LAB MANUAL 2026-27.docx
+
+PROGRAM 4 – Dijkstra's Shortest Path Algorithm
+Aim: Implement Dijkstra's algorithm to find the shortest path through a network.
+
+1. What is routing?
+Routing is the process of selecting the best path for transferring data from source to destination.
+
+2. What is Dijkstra's algorithm?
+It is a shortest-path algorithm used to find the minimum-cost path from one source node to all other nodes.
+
+3. What is a graph?
+A graph is a collection of vertices (nodes) connected by edges (links).
+
+4. What is a weighted graph?
+A weighted graph is a graph in which every edge has a cost or weight.
+
+5. What is a source node?
+The source node is the starting node from which shortest distances are calculated.
+
+6. What is an adjacency matrix?
+It is a matrix that represents connections and costs between nodes in a graph.
+
+7. What is infinity (INF) used for in the program?
+INF represents a very large cost and indicates that no direct connection exists between two nodes.
+
+8. Can Dijkstra's algorithm work with negative weights?
+No, Dijkstra's algorithm is designed for graphs with non-negative edge weights.
+
+9. What is a shortest-path tree?
+It is a tree that contains the shortest paths from a source node to all other reachable nodes.
+
+10. What is the main application of Dijkstra's algorithm?
+It is used in network routing, GPS navigation and shortest-path finding.
+
+PROGRAM 5 – Broadcast Tree Construction
+Aim: Take an example subnet of hosts and obtain a broadcast tree.
+
+1. What is broadcasting?
+Broadcasting is the process of sending a packet from one source to all nodes in a network.
+
+2. What is broadcast routing?
+It is a routing technique in which a router sends packets to all routers or hosts in the network.
+
+3. What is a broadcast tree?
+A broadcast tree is a tree structure used to deliver packets from one source to all other nodes.
+
+4. What are the methods of broadcast routing?
+Point-to-point transmission, flooding, multidestination routing, reverse path routing and spanning tree.
+
+5. What is flooding?
+Flooding is a technique in which a router forwards incoming packets through all outgoing links except the incoming link.
+
+6. What is a spanning tree?
+A spanning tree connects all vertices of a graph without forming any cycles.
+
+7. What is the purpose of a spanning tree?
+It provides a loop-free path to connect all nodes in a network.
+
+8. What is the cost of a spanning tree?
+It is the sum of the weights of all selected edges.
+
+9. What is an adjacency cost matrix?
+It represents the cost of direct connections between different hosts or nodes.
+
+10. What does the value 9999 represent in this program?
+It represents infinity, meaning there is no direct link between two hosts.
+
+11. What is a visited array?
+It stores whether a particular node has already been included in the spanning tree.
+
+PROGRAM 6 – Distance Vector Routing Algorithm
+Aim: Implement the Distance Vector Routing algorithm to obtain routing tables at each node.
+
+1. What is Distance Vector Routing?
+It is a routing algorithm in which each router maintains a table containing the minimum distance to every other node.
+
+2. What is a routing table?
+A routing table stores destination addresses, distances or costs, and next-hop information.
+
+3. How does Distance Vector Routing work?
+Each router shares its routing information with its immediate neighbours and updates its table based on the received information.
+
+4. What is a distance vector?
+It is a table containing the minimum distance from one router to all other routers.
+
+5. What is a next hop?
+A next hop is the next router through which a packet must travel to reach its destination.
+
+6. What is an autonomous system (AS)?
+An autonomous system is a group of networks and routers controlled by a single administration.
+
+7. What is intradomain routing?
+It is routing performed within a single autonomous system.
+
+8. What is interdomain routing?
+It is routing performed between different autonomous systems.
+
+9. What is RIP?
+RIP stands for Routing Information Protocol; it is an intradomain routing protocol based on Distance Vector Routing.
+
+10. What is the metric used in RIP?
+RIP uses hop count as its routing metric, and 16 hops represents infinity.
+
+11. What is periodic updating?
+A router periodically sends its routing table to its neighbouring routers.
+
+12. What is triggered updating?
+A router immediately sends an update whenever a change occurs in its routing table.
+
+13. What is the count-to-infinity problem?
+It occurs when routers continuously increase the distance to an unreachable destination because of incorrect routing information.
+
+14. What is Split Horizon?
+Split Horizon prevents a router from advertising a route back through the interface from which it learned that route.
+
+15. What is Link State Routing?
+It is a routing method in which every router maintains information about the complete network topology.
+
+16. What is OSPF?
+OSPF stands for Open Shortest Path First; it is an intradomain routing protocol based on Link State Routing.
+
+17. What is Path Vector Routing?
+It is a routing technique in which routers maintain and advertise the complete path of autonomous systems to a destination.
+
+18. What is BGP?
+BGP stands for Border Gateway Protocol; it is an interdomain routing protocol based on Path Vector Routing.
+
+19. What is the difference between RIP and OSPF?
+RIP uses Distance Vector Routing, whereas OSPF uses Link State Routing.
+
+20. What is the difference between E-BGP and I-BGP?
+E-BGP exchanges routing information between different autonomous systems, whereas I-BGP exchanges information within the same autonomous system.
+CN LAB MANUAL 2026-27.docx
+
+PROGRAM 7 – Data Encryption and Decryption
+Aim: Implement data encryption and decryption.
+
+1. What is network security?
+Network security protects network data and resources from unauthorized access, misuse and attacks.
+
+2. What is authentication?
+Authentication is the process of verifying the identity of a user or device.
+
+3. What is encryption?
+Encryption is the process of converting readable data (plaintext) into an unreadable form (ciphertext).
+
+4. What is decryption?
+Decryption is the process of converting encrypted data back into its original readable form.
+
+5. What is plaintext?
+Plaintext is the original readable message before encryption.
+
+6. What is ciphertext?
+Ciphertext is the unreadable encrypted message.
+
+7. What is a key in encryption?
+A key is a value used by an encryption algorithm to encrypt or decrypt data.
+
+8. What is symmetric-key encryption?
+It uses the same secret key for both encryption and decryption.
+
+9. What is asymmetric-key encryption?
+It uses two different keys: a public key and a private key.
+
+10. Give examples of public-key encryption algorithms.
+RSA, ElGamal and ECC are examples of public-key cryptographic algorithms.
+
+11. Give examples of private-key encryption algorithms.
+AES, DES and 3DES are examples of symmetric-key encryption algorithms.
+
+12. Which encryption technique is used in this program?
+The program uses the Caesar cipher technique, which shifts alphabetic characters according to an integer key.
+
+13. What happens if the key is 3 in Caesar cipher?
+Each alphabetic character is shifted three positions forward during encryption and three positions backward during decryption.
+
+14. What is the purpose of the isalpha() function?
+It checks whether a character is an alphabetic letter.
+
+PROGRAM 8 – Congestion Control Using Leaky Bucket Algorithm
+Aim: Write a program for congestion control using the Leaky Bucket Algorithm.
+
+1. What is congestion?
+Congestion occurs when too much data enters a network, causing delays and packet loss.
+
+2. What is congestion control?
+It is the process of controlling network traffic to avoid excessive congestion.
+
+3. What is the Leaky Bucket Algorithm?
+It is a congestion-control technique that converts bursty traffic into a steady and controlled data flow.
+
+4. Why is it called the Leaky Bucket Algorithm?
+It works like a bucket with a small hole, where water leaks out at a constant rate.
+
+5. What is bucket capacity?
+Bucket capacity is the maximum amount of data or packets that can be stored in the bucket.
+
+6. What happens when the bucket becomes full?
+Any additional incoming packets are discarded.
+
+7. What is output rate?
+Output rate is the fixed rate at which packets leave the bucket and enter the network.
+
+8. What is traffic shaping?
+Traffic shaping controls the rate and amount of data sent into a network.
+
+9. What are the two traffic-shaping techniques?
+Leaky Bucket and Token Bucket algorithms.
+
+10. What is the main advantage of the Leaky Bucket Algorithm?
+It controls bursty traffic and maintains a steady output rate, helping reduce congestion.
+
+11. What is the disadvantage of the Leaky Bucket Algorithm?
+It may discard packets when the bucket is full and does not allow bursts even after idle periods.
+
+12. What is QoS?
+QoS stands for Quality of Service; it refers to the ability of a network to provide better and controlled service to different types of traffic.
+
+13. What are the techniques used to improve QoS?
+Scheduling, traffic shaping, admission control and resource reservation.
+
+14. What are the scheduling techniques?
+FIFO queuing, Priority queuing and Weighted Fair Queuing.
+
+15. What is Integrated Services (IntServ)?
+It is a flow-based QoS model that reserves network resources for individual data flows.
+
+16. What is Differentiated Services (DiffServ)?
+It is a class-based QoS model that handles packets according to their service class.
+
+17. What is RSVP?
+RSVP stands for Resource Reservation Protocol; it is used to reserve network resources for data flows.
+CN LAB MANUAL 2026-27.docx
+
+PROGRAM 9 – Frame Sorting Technique Used in Buffers
+Aim: Write a program for frame sorting techniques used in buffers.
+
+1. What is frame sorting?
+Frame sorting is the process of arranging received frames in a proper order before processing them.
+
+2. Why is frame sorting required?
+It helps arrange frames correctly and ensures that data is processed in the proper sequence.
+
+3. What is a buffer?
+A buffer is a temporary memory area used to store data during transmission or processing.
+
+4. What are the types of frames used in this program?
+Numeric frames and text frames.
+
+5. What is numeric frame sorting?
+It arranges frames containing numbers in ascending or descending order.
+
+6. What is text frame sorting?
+It arranges text frames alphabetically.
+
+7. Which sorting method is used for numeric data?
+Numeric sorting compares numerical values and arranges them in the required order.
+
+8. What is alphabetical sorting?
+It arranges text in dictionary order, usually from A to Z.
+
+9. What happens if frames arrive out of order?
+They are rearranged into the correct order before further processing.
+
+PROGRAM 10 – Wireshark Tool
+Aim: Work with Wireshark for packet capture, starting Wireshark, viewing captured traffic, analysis, statistics and filters.
+
+1. What is Wireshark?
+Wireshark is a free, open-source network protocol analyzer used to capture and analyze network packets.
+
+2. What is packet capturing?
+Packet capturing is the process of collecting network packets transmitted and received through a network interface.
+
+3. Why is Wireshark used?
+It is used for network troubleshooting, protocol analysis, network security analysis and learning networking concepts.
+
+4. Is Wireshark free or paid?
+Wireshark is free and open-source software.
+
+5. What is a network interface?
+A network interface is a hardware or software connection through which a device communicates with a network.
+
+6. What is a packet?
+A packet is a formatted unit of data transmitted over a network.
+
+7. What are the three main panes in Wireshark?
+Packet List Pane, Packet Details Pane and Packet Bytes Pane.
+
+8. What is the Packet List Pane?
+It displays captured packets with details such as number, time, source, destination and protocol.
+
+9. What is the Packet Details Pane?
+It displays detailed protocol information of the selected packet.
+
+10. What is the Packet Bytes Pane?
+It displays the actual packet data in hexadecimal and ASCII formats.
+
+11. What is a capture filter?
+A capture filter specifies which packets should be collected during packet capturing.
+
+12. What is a display filter?
+A display filter shows only selected packets from the already captured traffic.
+
+13. What is the filter used to display TCP packets?
+tcp is used to display only TCP packets.
+
+14. What is the filter used to display UDP packets?
+udp is used to display only UDP packets.
+
+15. What is the filter used to display ICMP packets?
+icmp is used to display ICMP packets.
+
+16. What is the filter used to display HTTP packets?
+http is used to display HTTP packets.
+
+17. What is a PCAP file?
+A PCAP file is a file format used to save captured network packets for later analysis.
+
+18. What is Protocol Hierarchy in Wireshark?
+It displays the percentage and distribution of different protocols in captured traffic.
+
+19. What is Conversations in Wireshark?
+It displays communication statistics between pairs of network endpoints.
+
+20. What is IO Graphs?
+IO Graphs visually display network traffic and packet activity over time.
+
+21. Which library is used by Wireshark for packet capturing on Linux?
+Wireshark uses the libpcap library for packet capturing on Linux.
+
+22. What is TShark?
+TShark is the command-line version of Wireshark used to capture and analyze network packets.
+
+PROGRAM 11 – Nmap Scanning and Operating System Detection
+Aim: Show how to run Nmap scans and perform operating system detection using Nmap.
+
+1. What is Nmap?
+Nmap stands for Network Mapper. It is an open-source tool used to scan networks and discover active hosts and open ports.
+
+2. Why is Nmap used?
+It is used for network discovery, port scanning, service detection, OS detection and security auditing.
+
+3. What is port scanning?
+Port scanning is the process of checking network ports to identify which ports are open, closed or filtered.
+
+4. What is host discovery?
+Host discovery is the process of identifying active devices in a network.
+
+5. What is an open port?
+An open port is a network port on which an application or service is accepting connections.
+
+6. What is a closed port?
+A closed port is a port that is reachable but has no application accepting connections.
+
+7. What is a filtered port?
+A filtered port is a port whose status cannot be determined because a firewall or network filter blocks the probe.
+
+8. What is service detection?
+Service detection identifies the applications and their versions running on open ports.
+
+9. What is OS detection?
+OS detection identifies the operating system of a target device by analyzing its network responses.
+
+10. What is the full form of Nmap?
+Network Mapper.
+
+11. Which command is used to scan a single host?
+nmap 192.168.1.1 scans a single host.
+
+12. Which command is used to detect service versions?
+nmap -sV 192.168.1.1 detects service versions.
+
+13. Which command is used for OS detection?
+nmap -O 192.168.1.1 attempts to identify the target operating system.
+
+14. Which command is used to scan a specific port?
+nmap -p 80 192.168.1.1 scans port 80 of the specified host.
+
+15. Which command is used to scan a range of ports?
+nmap -p 1-1000 192.168.1.1 scans ports 1 to 1000.
+
+16. What is SYN scanning?
+SYN scanning is a TCP scanning technique that uses SYN packets to check port states.
+
+17. What is the advantage of Nmap?
+It is free, cross-platform, customizable and useful for network inventory and security auditing.
+
+18. Which operating systems support Nmap?
+Nmap supports Windows, Linux and macOS.
+
+19. What information does Nmap output provide?
+It provides host status, open ports, services, service versions and sometimes operating system information.
+
+Note: Run scans only on systems or networks for which you have permission.
+
+PROGRAM 12(i) – NS2 Simulator Introduction
+Aim: Introduction to NS2 Simulator.
+
+1. What is NS2?
+NS2 stands for Network Simulator version 2. It is an open-source, event-driven tool used to simulate computer networks.
+
+2. Why is NS2 used?
+It is used to study network performance, packet transmission, packet drops, delay, throughput and congestion.
+
+3. Is NS2 a hardware-based simulator?
+No, it is a software-based simulator that allows us to study network behaviour without actual network hardware.
+
+4. Which language is used to write NS2 simulation scripts?
+TCL (Tool Command Language) is used to write NS2 simulation scripts.
+
+5. What is NAM in NS2?
+NAM stands for Network Animator; it visually displays network topology and packet movement.
+
+6. What is a TCL file?
+A TCL file is a script file containing instructions to create and run a network simulation in NS2.
+
+7. What is a trace file?
+A trace file (.tr) stores simulation events such as packet transmission, reception and dropping.
+
+8. What is a NAM file?
+A NAM file (.nam) stores simulation information used for graphical network animation.
+
+9. Which protocols are supported by NS2?
+NS2 supports protocols such as TCP, UDP, FTP, HTTP, AODV and DSR.
+
+10. What are the main features of NS2?
+It supports wired and wireless networks, multiple protocols, trace-file generation and graphical visualization using NAM.
+
+11. What is a node in NS2?
+A node represents a computer or network device in the simulated network.
+
+12. What is a link in NS2?
+A link represents the communication connection between two nodes.
+
+13. What is a duplex link?
+A duplex link allows data transmission in both directions between two nodes.
+
+14. What is an agent in NS2?
+An agent represents a transport-layer protocol such as TCP or UDP.
+
+15. What is a traffic generator?
+A traffic generator creates network traffic for transmission during simulation.
+
+16. What is the command used to run an NS2 program?
+ns filename.tcl is used to execute an NS2 simulation script.
+
+17. What is the command used to open NAM?
+nam filename.nam is used to view the network animation.
+
+18. What are the advantages of NS2?
+It is free, open-source and useful for testing network protocols and analyzing network performance.
+
+19. What is packet drop?
+Packet drop occurs when a packet fails to reach its destination, often because of congestion or buffer overflow.
+
+20. What is throughput?
+Throughput is the amount of successfully delivered data per unit of time.
+
+21. What is network delay?
+Network delay is the time taken by a packet to travel from source to destination.
