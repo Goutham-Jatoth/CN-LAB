@@ -1,0 +1,110 @@
+PROGRAM-10
+AIM: WORK WITH WIRESHARK TOOL FOR
+i. PACKET CAPTURE USING WIRE SHARK
+ii. STARTING WIRE SHARK
+iii. VIEWING CAPTURED TRAFFIC
+iv. ANALYSIS AND STATISTICS & FILTERS.
+
+DESCRIPTION:
+Wireshark is a network protocol analyzer — a powerful tool used to capture, inspect, and analyze network traffic in real time.
+It helps students, network engineers, and cybersecurity experts understand what’s happening on a network at a very detailed level.
+◻	What is Wireshark?
+Wireshark is an open-source packet analyzer that allows you to see what’s happening on your network — packet by packet.
+It’s often used for:
+•	Network troubleshooting
+•	Protocol development
+•	Network security analysis
+•	Learning network concepts
+◻	Features of Wireshark
+1.	Captures live network data from Ethernet, Wi-Fi, Bluetooth, etc.
+2.	Displays packet details like source, destination, protocol, and payload.
+3.	Supports hundreds of protocols (TCP, UDP, HTTP, DNS, ICMP, etc.).
+4.	Filters traffic using powerful display filters.
+5.	Provides statistical analysis of network performance.
+6.	Cross-platform support (Windows, Linux, macOS).
+7.	Graphical and Command-line modes (wireshark GUI, tshark CLI).
+◻	Wireshark Architecture
++	+
+|	User Interface (GUI) |
++	+
+|	Packet Analyzer	|
++	+
+|	Capture Engine (libpcap) |
++	+
+|	Network Interface	|
++	+
+•	Capture Engine: Collects live packets from the network using libraries like libpcap
+(Linux) or WinPcap (Windows).
+•	Packet Analyzer: Decodes packets and shows detailed information.
+•	User Interface: Displays packets, filters, and statistics visually.
+ 
+i.	PACKET CAPTURE USING WIRESHARK
+1.	Open Wireshark application on your system.
+2.	The main interface will show a list of available network interfaces (e.g., Ethernet, Wi-Fi).
+3.	Select the interface connected to the internet.
+4.	Click on “Start Capturing Packets” (blue shark fin icon).
+5.	Perform some network activity (e.g., open a website, ping a server).
+6.	Wireshark will capture live packets transmitted and received by your system.
+7.	Click Stop (Red Square button) to end the capture session.
+◻	Output: A list of captured packets will appear with columns like No., Time, Source, Destination, Protocol, and Info.
+ii.	STARTING WIRESHARK
+
+1.	Launch Wireshark from the Start Menu or Terminal.
+o	Windows: Start → Wireshark
+o	Linux: $ sudo wireshark
+2.	Choose your desired network adapter (e.g., Wi-Fi 0, eth0, etc.).
+3.	Once selected, packet capturing begins automatically.
+4.	You can pause or stop capturing at any time.
+5.	Save the capture file using File → Save As → .pcap format.
+◻	Note: Administrative (root) privileges are required to capture live packets.
+
+iii.	VIEWING CAPTURED TRAFFIC
+
+The Wireshark window is divided into three panes:
+
+Pane	Description
+Packet List Pane (Top)	Displays summary of all captured packets with number, time, source, destination, protocol, and info.
+Packet Details Pane (Middle)	Shows detailed protocol hierarchy of the selected packet (Ethernet → IP
+→ TCP/UDP → Data).
+Packet Bytes Pane (Bottom)	Displays the actual raw data of the packet in hexadecimal and ASCII formats.
+
+You can click on any packet to expand its protocol layers and inspect its details such as:
+•	Source and Destination IP address
+•	TCP flags, ports, and sequence numbers
+•	HTTP request or DNS query details
+
+
+iv.	ANALYSIS AND STATISTICS & FILTERS
+
+A.	Applying Filters
+Wireshark provides Display Filters to focus on specific traffic types.
+
+Filter	Description
+ip	Show all IP packets
+tcp	Show only TCP packets
+udp	Show only UDP packets
+icmp	Show ping packets
+http	Show HTTP request/response packets
+ip.addr == 192.168.1.1	Show packets from/to specific IP
+tcp.port == 80	Show packets using port 80
+
+Example:
+Type http in the filter bar and press Enter — Wireshark will only display HTTP packets.
+B.	Viewing Statistics
+Wireshark provides multiple built-in statistical analysis tools:
+
+Menu Path	Function
+Statistics → Protocol Hierarchy	Shows percentage of each protocol used.
+Statistics → Conversations	Displays communication between pairs of hosts.
+Statistics → Endpoints	Lists all source and destination IPs.
+Statistics → IO Graphs	Graphical view of traffic over time.
+
+These tools help in understanding network utilization, protocol distribution, and traffic patterns.
+
+RESULT / OUTPUT:
+
+Successfully captured, viewed, and analyzed network packets using Wireshark. Students were able to:
+•	Start Wireshark and capture packets in real time.
+•	View and decode various network protocols.
+•	Apply filters to focus on specific traffic.
+Analyze statistics and visualize network performance
