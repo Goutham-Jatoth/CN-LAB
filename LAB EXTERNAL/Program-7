@@ -1,0 +1,100 @@
+SOURCE CODE:
+
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
+
+void encrypt(char text[], int key) {
+    for (int i = 0; text[i] != '\0'; ++i) {
+        char ch = text[i];
+        if (isalpha(ch)) {
+            char base = islower(ch) ? 'a' : 'A';
+            ch = (ch - base + key) % 26 + base;
+        }
+        text[i] = ch;
+    }
+}
+
+void decrypt(char text[], int key) {
+    for (int i = 0; text[i] != '\0'; ++i) {
+        char ch = text[i];
+        if (isalpha(ch)) {
+            char base = islower(ch) ? 'a' : 'A';
+            ch = (ch - base - key + 26) % 26 + base;
+        }
+        text[i] = ch;
+    }
+}
+
+int main() {
+    char text[100];
+    int key, choice;
+    char cont;
+
+    printf("=== Data Encryption and Decryption Simulation ===\n\n");
+
+    printf("Enter a message: ");
+    fgets(text, sizeof(text), stdin);
+    text[strcspn(text, "\n")] = '\0';  // Remove newline
+
+    printf("Enter encryption key (integer): ");
+    scanf("%d", &key);
+
+    do {
+        printf("\n----------- MENU -----------\n");
+        printf("1. Encrypt the Message\n");
+        printf("2. Decrypt the Message\n");
+        printf("3. Exit\n");
+        printf("-----------------------------\n");
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+
+        switch (choice) {
+            case 1:
+                encrypt(text, key);
+                printf("\nEncrypted Text (Ciphertext): %s\n", text);
+                break;
+
+            case 2:
+                decrypt(text, key);
+                printf("\nDecrypted Text (Plaintext): %s\n", text);
+                break;
+
+            case 3:
+                printf("\nExiting the program...\n");
+                return 0;
+
+            default:
+                printf("\nInvalid choice! Please enter 1, 2, or 3.\n");
+        }
+    } while (1);
+
+    return 0;
+}
+OUTPUT:
+=== Data Encryption and Decryption Simulation ===
+Enter a message: ACE COLLEGE
+Enter encryption key (integer): 3
+----------- MENU -----------
+1. Encrypt the Message
+2. Decrypt the Message
+3. Exit
+-----------------------------
+Enter your choice: 1
+Encrypted Text (Ciphertext): DFH FROOHJH
+----------- MENU -----------
+1. Encrypt the Message
+2. Decrypt the Message
+3. Exit
+
+-----------------------------
+Enter your choice: 2
+Decrypted Text (Plaintext): ACE COLLEGE
+----------- MENU -----------
+1. Encrypt the Message
+2. Decrypt the Message
+3. Exit
+
+-----------------------------
+Enter your choice: 3
+Exiting the program...
