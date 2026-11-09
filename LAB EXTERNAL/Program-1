@@ -1,0 +1,160 @@
+1.1 CHARACTER COUNT
+
+SOURCE CODE:
+#include <stdio.h>
+#include <string.h>
+
+int main() {
+    char data[100];
+    int frame_size;
+    int i, j, k;
+    int current_pos = 0;
+
+    printf("Enter the data string: ");
+    scanf("%s", data);
+
+    printf("Enter the desired frame size: ");
+    scanf("%d", &frame_size);
+     printf("\n The Total number of chars are :%d ",strlen(data));
+  
+    printf("\nTransmitted Frames:\n");
+    while (current_pos < strlen(data)) {
+        int actual_frame_len = 0;
+        // Calculate the actual frame length, ensuring it doesn't exceed the data string
+        if ((strlen(data) - current_pos) < frame_size) {
+            actual_frame_len = strlen(data) - current_pos;
+        } else {
+            actual_frame_len = frame_size;
+        }
+
+        // Print the character count for the current frame
+        printf("%d ", actual_frame_len);
+
+        // Print the characters of the current frame
+        for (k = 0; k < actual_frame_len; k++) {
+            printf("%c", data[current_pos + k]);
+        }
+        printf("\n"); // New line for the next frame
+        current_pos += actual_frame_len;
+    }
+    return 0;
+}
+
+OUTPUT:
+1.	Enter the data string: ACECOLLEGE
+Enter the desired frame size: 4
+
+ 	The Total number of chars are :10 
+Transmitted Frames:
+4 ACEC
+4 OLLE
+2 GE
+
+
+
+2.	Enter the data string: CSDDEPARTMENT
+Enter the desired frame size: 5
+
+The Total number of chars are :13 
+Transmitted Frames:
+5 CSDDE
+5 PARTM
+3 ENT
+
+
+
+
+
+
+
+1.2 BYTE STUFFING
+
+SOURCE CODE:
+#include <stdio.h>
+#include <string.h>
+
+#define FLAG 'F' // Define Flag character
+#define ESC 'E'  // Define Escape character
+
+int main() {
+    char data[100];
+    char stuffedData[200]; // Array to store stuffed data (larger to accommodate stuffed characters)
+    int i, j = 0;
+
+    printf("Enter the data string: ");
+    scanf("%s", data);
+
+    // Add starting Flag character
+    stuffedData[j++] = FLAG;
+
+    // Iterate through the data and perform stuffing
+    for (i = 0; i < strlen(data); i++) {
+        if (data[i] == FLAG || data[i] == ESC) {
+            stuffedData[j++] = ESC; // Stuff an ESC character
+        }
+        stuffedData[j++] = data[i]; // Add the original data character
+    }
+
+    // Add ending Flag character
+    stuffedData[j++] = FLAG;
+    stuffedData[j] = '\0'; // Null-terminate the stuffed string
+
+    printf("Original Data: %s\n", data);
+    printf("Stuffed Data: %s\n ", stuffedData);
+
+    return 0;
+}
+
+OUTPUT:
+1.	Enter the data string: ACE
+Original Data: ACE
+Stuffed Data: FACEEF
+
+2.	Enter the data string: CSDESC
+Original Data: CSDESC
+Stuffed Data: FCSDEESCF
+
+
+
+
+1.3 BIT STUFFING
+
+SOURCE CODE:
+#include <stdio.h>
+#include <string.h>
+
+int main() {
+    char data[100], stuffedData[200];
+    int i, count = 0, j = 0;
+    
+    printf("Enter the data: ");
+    scanf("%s", data);
+    
+    for(i = 0; i < strlen(data); i++) {
+        if(data[i] == '1') {
+            count++;
+            stuffedData[j++] = data[i];
+        } else {
+            count = 0;
+            stuffedData[j++] = data[i];
+        }
+        
+        if(count == 5) {
+            count = 0;
+            stuffedData[j++] = '0';
+        }
+    }
+    
+    stuffedData[j] = '\0';
+    
+    printf("Data after bit stuffing: %s\n", stuffedData);
+    
+    return 0;
+}
+
+OUTPUT:
+1.	Enter the data: 01111110
+Data after bit stuffing: 011111010
+
+2.	Enter the data: 011111111111111101
+Data after bit stuffing: 011111011111011111001
