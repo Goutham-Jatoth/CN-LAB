@@ -1,0 +1,80 @@
+SOURCE CODE:
+#include <stdio.h>
+#define INF 9999
+#define MAX 10
+
+int main() {
+    int n; // Number of hosts
+    int cost[MAX][MAX];
+    int visited[MAX] = {0};
+    int i, j, edges = 1, a, b;
+    int min, total_cost = 0;
+
+    printf("=== Computer Network Simulation ===\n");
+    printf("Broadcast Tree Construction using Spanning Tree Algorithm\n\n");
+
+    printf("Enter number of hosts (nodes) in the subnet: ");
+    scanf("%d", &n);
+
+    printf("\nEnter the cost adjacency matrix (Enter 9999 if no direct link):\n");
+    for (i = 0; i < n; i++) {
+        for (j = 0; j < n; j++) {
+            scanf("%d", &cost[i][j]);
+        }
+    }
+    visited[0] = 1;  // Start simulation from Host 1
+    printf("\nSimulating Broadcast Tree Formation...\n");
+    printf("----------------------------------------\n");
+
+    while (edges < n) {
+        min = INF;
+
+        for (i = 0; i < n; i++) {
+            if (visited[i]) {
+                for (j = 0; j < n; j++) {
+                    if (!visited[j] && cost[i][j] < min) {
+                        min = cost[i][j];
+                        a = i;
+                        b = j;
+                    }
+                }
+            }
+        }
+
+        printf("Step %d: Connect Host %d --> Host %d  |  Link Cost = %d\n",
+               edges, a + 1, b + 1, min);
+
+        total_cost += min;
+        visited[b] = 1;
+        edges++;
+    }
+
+    printf("----------------------------------------\n");
+    printf("Total Cost of Broadcast Tree = %d\n", total_cost);
+    printf("Simulation Complete: Broadcast Tree Formed Successfully.\n");
+
+    return 0;
+}
+
+
+OUTPUT :
+=== Computer Network Simulation ===
+Broadcast Tree Construction using Spanning Tree Algorithm
+
+Enter number of hosts (nodes) in the subnet: 4
+
+Enter the cost adjacency matrix (Enter 9999 if no direct link):
+0 10 7 9999
+10 0 9999 5
+7 9999 0 6
+9999 5 6 0
+
+
+Simulating Broadcast Tree Formation...
+----------------------------------------
+Step 1: Connect Host 1 --> Host 3  |  Link Cost = 7
+Step 2: Connect Host 3 --> Host 4  |  Link Cost = 6
+Step 3: Connect Host 4 --> Host 2  |  Link Cost = 5
+----------------------------------------
+Total Cost of Broadcast Tree = 18
+Simulation Complete: Broadcast Tree Formed Successfully.
