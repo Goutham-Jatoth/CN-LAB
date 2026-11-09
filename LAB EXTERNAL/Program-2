@@ -1,0 +1,55 @@
+SOURCE CODE:
+#include <stdio.h>
+#include <string.h>
+#define MAX_SIZE 100
+void computeCRC(char data2[], char polynomial2[], int dl, int pl) 
+{
+    for (int i = 0; i < dl; i++) 
+    {
+        if (data2[i] == '1') 
+        {
+            for (int j = 0; j < pl; j++) 
+            {
+                data2[i + j] = (data2[i + j] == polynomial2[j]) ? '0' : '1';
+            }
+        }
+    }
+
+    // Output CRC code
+    printf("%s", &data2[dl]);
+}
+
+int main() {
+    char data[MAX_SIZE];
+    char polynomial[] = "1101";
+    char codedata[MAX_SIZE];
+    // Input data
+    printf("Enter data: ");
+    scanf("%s", data);    
+    printf("Enter Polynomial: ");
+    scanf("%s", polynomial);
+    int dl = strlen(data);
+    int pl = strlen(polynomial);
+    for (int i = 0; i < pl - 1; i++) 
+        {
+        data[dl + i] = '0';
+        }
+    printf("Data with zeros: %s\n\n", data);
+    printf("CRC at sender side: ");
+    computeCRC(data, polynomial, dl,pl);
+    printf("\n\nEnter codeword (Data + CRC): ");
+    scanf("%s", codedata);
+    printf("CRC at receiver side: ");
+    computeCRC(codedata, polynomial, dl, pl);
+}
+
+OUTPUT:
+
+Enter data: 111101
+Enter Polynomial: 1101
+Data with zeros: 111101000
+
+CRC at sender side: 011
+
+Enter codeword (Data + CRC): 111101011
+CRC at receiver side: 000
